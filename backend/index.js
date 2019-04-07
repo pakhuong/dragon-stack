@@ -1,14 +1,15 @@
-const Generation = require('./generation');
+const express = require("express");
 
-const generation = new Generation();
+const GenerationEngine = require("./engine");
 
-console.log('generation', generation);
+const app = express();
+const engine = new GenerationEngine();
+const port = 3000;
 
-const gooby = generation.newDragon();
+engine.start();
 
-console.log('gooby', gooby);
+app.get("/dragon/new", (req, res) => {
+    res.json({ dragon: engine.generation.newDragon() });
+});
 
-setTimeout(() => {
-  const mimar = generation.newDragon();
-  console.log('mimar', mimar);
-}, 15000);
+app.listen(port, () => console.log(`listening on port ${port}`));

@@ -22,7 +22,7 @@ class GenerationEngine {
 
         this.timer = setTimeout(
             () => this.buildNewGeneration(),
-            this.generation.expiration.getTime()
+            this.generation.expiration.getTime() - Date.now()
         );
     }
 }
